@@ -1,6 +1,5 @@
-FROM ubuntu
+FROM debian:wheezy
 MAINTAINER marius.wyss+dockerhub@gmail.com
-#mjpg-streamer version r63
 #docker run -d -p 90:80 --device=/dev/video0 --name=mjpg-streamer-docker-testrun mrwyss/mjpg-streamer-docker
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -10,11 +9,15 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 	gcc \
 	imagemagick
 
+RUN apt-get clean \
+	&& rm -rf /tmp/* /var/tmp/*  \
+    && rm -rf /var/lib/apt/lists/*
+
 ADD mjpg-streamer.tar.gz /
 WORKDIR /mjpg-streamer
 
-RUN ln -s /usr/include/linux/videodev2.h /usr/include/linux/videodev.h
-RUN make all
+#RUN ln -s /usr/include/linux/videodev2.h /usr/include/linux/videodev.h
+RUN make 
 
 
 RUN cp mjpg_streamer /usr/local/bin
