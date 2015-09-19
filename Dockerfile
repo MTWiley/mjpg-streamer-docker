@@ -1,6 +1,5 @@
 FROM debian:wheezy
 MAINTAINER marius.wyss+dockerhub@gmail.com
-#docker run -d -p 90:80 --device=/dev/video0 --name=mjpg-streamer-docker-testrun mrwyss/mjpg-streamer-docker
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
 	libv4l-dev \
@@ -16,7 +15,6 @@ RUN apt-get clean \
 ADD mjpg-streamer.tar.gz /
 WORKDIR /mjpg-streamer
 
-#RUN ln -s /usr/include/linux/videodev2.h /usr/include/linux/videodev.h
 RUN make 
 RUN apt-get remove -y \
 	make \
