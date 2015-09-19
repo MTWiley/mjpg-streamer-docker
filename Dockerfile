@@ -12,17 +12,18 @@ RUN apt-get clean \
 	&& rm -rf /tmp/* /var/tmp/*  \
     && rm -rf /var/lib/apt/lists/*
 
-ADD mjpg-streamer.tar.gz /
+ADD mjpg_streamer-r63-nogspcav.tar.gz /mjpg-streamer
 WORKDIR /mjpg-streamer
+RUN ln -s /usr/include/linux/videodev2.h /usr/include/linux/videodev.h
 
-RUN make 
+RUN make all
 RUN apt-get remove -y \
 	make \
 	gcc
 
 
 RUN cp mjpg_streamer /usr/local/bin
-RUN cp output_http.so input_file.so input_uvc.so /usr/local/lib/
+RUN cp *.so /usr/local/lib/
 RUN cp -R www /usr/local/www
 ENV LD_LIBRARY_PATH /usr/local/lib/
 

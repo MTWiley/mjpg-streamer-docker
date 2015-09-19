@@ -2,7 +2,8 @@
 
 Webcam streamer, works great together with octoprint. 
 
-Thanks to : https://hub.docker.com/r/usertaken/mjpg-streamer/
+Compiled plugins: input_testpicture.so, output_autofocus.so, output_http.so, input_uvc.so, output_file.so
+
 
 docker run -d -p 80 --device=/dev/video0 --name=my_container_name mrwyss/mjpg-streamer
 
