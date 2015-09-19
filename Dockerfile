@@ -18,6 +18,9 @@ WORKDIR /mjpg-streamer
 
 #RUN ln -s /usr/include/linux/videodev2.h /usr/include/linux/videodev.h
 RUN make 
+RUN apt-get remove -y \
+	make \
+	gcc
 
 
 RUN cp mjpg_streamer /usr/local/bin
