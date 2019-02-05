@@ -1,0 +1,26 @@
+mjpg-streamer-video0:
+  container_name: mjpg-streamer-video0
+  restart: always
+  image: mrwyss/mjpg-streamer
+  devices:
+    - /dev/video0
+  ports:
+    - 8081:80
+  
+mjpg-streamer-video1:
+  container_name: mjpg-streamer-video1
+  restart: always
+  image: mrwyss/mjpg-streamer
+  devices:
+    - /dev/video1:/dev/video0
+  ports:
+    - 8082:80
+
+mjpg-streamer-video2:
+  container_name: mjpg-streamer-video2
+  restart: always
+  image: mrwyss/mjpg-streamer
+  devices:
+    - /dev/video2:/dev/video0
+  ports:
+    - 8083:80
